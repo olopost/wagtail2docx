@@ -2,6 +2,12 @@ wagtail2docx
 ================================================================================
 wagtail plugin to convert page to Microsoft Word docx document
 
+.. warning::
+   This plugin is under development
+
+
+Présentation
+--------------------------------------------------------------------------------
 Example of original html page in wagtail
 
 .. image::  media/original_html.png
