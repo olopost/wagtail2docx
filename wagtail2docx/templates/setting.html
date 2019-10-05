@@ -1,0 +1,45 @@
+{% extends 'wagtailadmin/base.html' %}
+
+{% block content %}
+
+    <header class="">
+        <div class="row nice-padding">
+            <div class="left">
+                <div class="col header-title">
+                    <h1 class="icon icon-mail">{{ title }}</h1>
+                </div>
+            </div>
+            <div class="right"></div>
+        </div>
+    </header>
+
+    <div class="nice-padding">
+    <h2>Préparation du générateur</h2>
+    <form method="post" action=".">
+                    <select onchange="updatedest()" id="id" name="id">
+                        {% for page in pages %}
+                            <option value="{{ page.id }}">{{ page }}</option>
+                        {% endfor %}
+                    </select>
+    <input type="hidden" id="filename" name="filename" value="Root">
+                    <textarea name="dest" id="dest" rows="4" cols="50">
+Samuel MEYNARD
+12E rue MARAT
+78210 Saint Cyr l'École
+            </textarea></td>
+        <input type="submit" class="button" name="gen_env" value="Générer le document">
+        {% csrf_token %}
+    </form>
+{% endblock content %}
+{% block extra_js %}
+    <script>
+        function updatedest() {
+            $('#dest').val($('#id').attr('selected', true).val());
+            $('#filename').val($('#id')[0].options[$('#id')[0].options["selectedIndex"]].text);
+        }
+        function updateexp() {
+            $('#exp').val($('#carnetexp').attr('selected', true).val());
+        }
+
+    </script>
+{% endblock %}

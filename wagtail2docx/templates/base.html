@@ -1,40 +1,65 @@
-{% load static wagtailuserbar %}
-
 <!DOCTYPE html>
-<html class="no-js" lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>
-            {% block title %}
-                {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
-            {% endblock %}
-            {% block title_suffix %}
-                {% with self.get_site.site_name as site_name %}
-                    {% if site_name %}- {{ site_name }}{% endif %}
-                {% endwith %}
-            {% endblock %}
-        </title>
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{{ self.title }}</title>
+    <link href="/static/css/monokai.css" rel="stylesheet"/>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/static/css/blog.css" rel="stylesheet"/>
+<script   src="https://code.jquery.com/jquery-3.4.1.min.js"   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="   crossorigin="anonymous"></script>
 
-        {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/wagtail2docx.css' %}">
-
-        {% block extra_css %}
-            {# Override this in templates to add extra stylesheets #}
+    <link href="/static/css/lightbox.min.css" rel="stylesheet"/>
+    <script>
+        {% block headscript %}
         {% endblock %}
-    </head>
+    </script>
+</head>
 
-    <body class="{% block body_class %}{% endblock %}">
-        {% wagtailuserbar %}
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="menu" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+ <span class="navbar-toggler-icon"></span>
+  </button>
+    <button class="navbar-toggler" type="menu" data-toggle="collapse" data-target="#navbarsearch" aria-controls="navbar-search" aria-expanded="false" aria-label="Toggle search">
+        <span class="fa fa-search"></span>
+    </button>
+  <a class="navbar-brand" href="/"><img src="/static/img/meyn_logo.svg"/></a>
 
-        {% block content %}{% endblock %}
+  <div id="navbar" class="collapse navbar-collapse">
+        <div class="nav-item dropdown" aria-labelledby="ddtoggle_{{ page.pk }}">
+                <a style=" white-space: normal" class="btn btn-dark nav-link" href="{{ page.url }}">{{ page.title }}</a>
+        </div>
+  </div>
+<div id="navbarsearch" class=" navbar-right align-right navbar-dark bg-dark">
+  <form action="/search/" method="get" class="form-inline">
+       {% csrf_token %}
+    <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn-white" type="submit">Search</button>
+  </form>
+</div>
+    <div type="button" class="btn btn-primary"> <span class="oi oi-account-logout"></span></div>
+</nav>
+    <main class="mt-5">
 
-        {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/wagtail2docx.js' %}"></script>
+        <!--Main container-->
+        <div class="container jumbotron">
+{% block content %}
+            {% endblock %}
+	</div>
+    </main>
+<script>
+    {% block endscript %}{% endblock %}
+</script>
+<script src="/static/js/lightbox.min.js"></script>
+<script>
+    lightbox.option({
+      'resizeDuration': 1,
+        'fadeDuration': 1,
+      'wrapAround': true
+    })
+</script>
+   </body>
 
-        {% block extra_js %}
-            {# Override this in templates to add extra javascript #}
-        {% endblock %}
-    </body>
 </html>
