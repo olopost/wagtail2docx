@@ -2,9 +2,12 @@ wagtail2docx
 ================================================================================
 wagtail plugin to convert page to Microsoft Word docx document
 
-.. image:: media/Capture d’écran 2019-10-05 à 17.47.42.png
+Example of original html page in wagtail
+.. image:: media/original_html.png
 
-.. image:: media/Capture d’écran 2019-10-05 à 17.47.54.png
+The same generated in doc
+.. image:: media/word_page.png
 
-.. image:: media/Capture d’écran 2019-10-05 à 17.48.26.png
+Create a word document
+.. image:: media/settings.png
 
