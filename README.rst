@@ -6,17 +6,12 @@ warning
   This plugin is under development
 
 
-Présentation
+Overview
 --------------------------------------------------------------------------------
-Example of original html page in wagtail
 
-.. image::  media/original_html.png
-
-The same generated in doc
-
-.. image::  media/word_page.png
-
-Create a word document
-
-.. image::  media/settings.png
++------------------------------------------+------------------------------------+
+| Example of original html page in wagtail | .. image::  media/original_html.png|
+| The same generated in doc                | .. image::  media/word_page.png    |
+| Create a word document                   | .. image::  media/settings.png     |
++------------------------------------------+------------------------------------+
 
