@@ -1,0 +1,23 @@
+
+{% extends "base.html" %}
+{% load wagtailuserbar   %}
+{% load wagtailimages_tags %}
+{% load site_extra %}
+
+{% block content %}
+    {% wagtailuserbar %}
+    <section class="text-center my-5">
+
+        <!-- Section heading -->
+        <h2 class="h1-responsive font-weight-bold my-5">{{ page.title }}</h2>
+        <p class="dark-green-ic">
+
+            {{ plot | safe }}
+
+        </p>
+        <!-- Section description -->
+        <p class="dark-grey-text w-responsive mx-auto mb-5">
+            {{ stock_table | safe}}
+        </p>
+    </section>
+{% endblock %}

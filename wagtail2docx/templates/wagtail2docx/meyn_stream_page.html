@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% load wagtailimages_tags %}
+{% load wagtailuserbar %}
+
+{% block body_class %}template-meynpage{% endblock %}
+
+{% block content %}
+    <div class="card-deck mt-2">
+        <div class="card col-sm-8 rounded">
+            <div class="card-body">
+                <!-- Post title -->
+                <h1 class="card-title">{{ self.title }}</h1>
+                <!-- Post data -->
+                <p class="card-text">Publié le : {{ self.last_published_at }}</p>
+                <!-- Excerpt -->
+            </div> <!-- card-body -->
+        </div>
+<div class="card col-sm-4 rounded">
+           <div class="card-block">
+
+               {% if self.cover %}
+
+                   <a href="{{ self.url }}">
+                   {% image self.cover fill-450x250 class="card-img-top img-fluid rounded" %}
+                   </a>
+               {% endif %}
+           </div>
+</div>
+    </div>
+
+    <section class="text-left my-5" xmlns="http://www.w3.org/1999/html">
+
+{% wagtailuserbar %}
+
+
+ <!-- Section heading -->
+      {% for block in page.body %}
+          {% include_block block %}
+      {% endfor %}
+       <a href="{{ page.get_parent.url }}   " class="btn btn-blue fa fa-arrow-left">&nbsp;Retour</a>
+   </section>
+{% endblock %}
+
+

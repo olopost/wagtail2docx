@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailuserbar %}
+
+{% block body_class %}template-meynindexpage{% endblock %}
+
+{% block content %}
+        {% wagtailuserbar %}
+    <section class="text-center my-5">
+
+        <!-- Section heading -->
+        <!-- Section description -->
+            {{ page.intro|richtext }}
+
+        <!-- Grid row -->
+        <div class="card-deck mt-3">
+
+
+{# specific permet d'avoir les élements #}
+       {% for post in page.get_children.live.specific %}
+             {% if forloop.counter|add:"-1"|divisibleby:"3"  %}
+            </div><div class="card-deck mt-3">
+        {% endif %}
+           <div class="card col-sm-4 rounded">
+           <div class="card-block">
+
+               {% if post.cover %}
+
+                   <a href="{{ post.url }}">
+                   {% image post.cover fill-450x250 class="card-img-top img-fluid rounded" %}
+                   </a>
+               {% endif %}
+
+               <div class="card-body">
+                   <!-- Post title -->
+                   <h4 class="card-title">{{ post.title }}</h4>
+                   <!-- Post data -->
+                   <p class="card-text">Publié le : {{ post.last_published_at }}</p>
+                   <!-- Excerpt -->
+                   <a class="btn btn-blue fa fa-book" href="{{ post.url }}">
+                       Lire
+                   </a>
+               </div> <!-- card-body -->
+
+
+           </div>
+
+           </div> <!-- card -->
+           {% if forloop.last %}
+           {% endif %}
+    {% endfor %}
+
+    </section>
+{% endblock %}
+{% block script %}
+{% endblock %}

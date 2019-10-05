@@ -1,0 +1,59 @@
+
+{% extends "base.html" %}
+{% load wagtailuserbar   %}
+{% load wagtailimages_tags %}
+{% load site_extra %}
+
+{% block content %}
+    {% wagtailuserbar %}
+    <section class="text-center my-5">
+
+        <!-- Section heading -->
+        <h2 class="h1-responsive font-weight-bold my-5">{{ page.title }}</h2>
+        <!-- Section description -->
+        <p class="dark-grey-text w-responsive mx-auto mb-5">
+            {{ p.name }}
+        </p>
+
+        <!-- Grid row -->
+        <div class="card-columns">
+            <!-- Grid column -->
+
+
+            {# specific permet d'avoir les élements #}
+            {% for p in products %}
+                <div class="card" style="width: 18rem">
+
+                        {% if p.photo %}
+                        <img src="/media/{{ p.photo }}" width="350px" class="card-img-top img-fluid"/>
+                        {% endif %}
+
+                        <div class="card-body">
+                    <!-- Post title -->
+                    <h4 class="card-title">{{ p.name }}</h4>
+                    <!-- Post data -->
+                    <p class="card-text">Acheté le : {{ p.purchase_date }}</p>
+                    <!-- Excerpt -->
+                        <a class="card-link fa fa-download" href="{{ p.bill.url }}">
+                            Facture
+                        </a>
+</div> <!-- card-body -->
+                    <!-- Read more button -->
+<p class="card-footer">
+                {% if p.end_of_warranty|warranty_guard > 190 %}
+                    <a href="" class="btn btn-blue btn-rounded btn-md">{{ p.end_of_warranty|timeuntil }}</a>
+                {% elif p.end_of_warranty|warranty_guard > 91 %}
+                    <a href="" class="btn btn-orange btn-rounded btn-md">{{ p.end_of_warranty|timeuntil }}</a>
+                    {% elif p.end_of_warranty|warranty_guard > 0 %}
+                    <a href="" class="btn btn-red btn-rounded btn-md">{{ p.end_of_warranty|timeuntil }}</a>
+                    {% else %}
+                    <a href="" class="btn btn-grey btn-rounded btn-md">Fin de Garantie</a>
+                {% endif %}
+</p> <!-- card-footer -->
+</div> <!-- card -->
+            {% endfor %}
+        </div>
+    <a class="btn btn-blue fa fa-arrow-left" href="{{ page.get_parent.url }}"> Retour</a>
+    </section>
+
+{% endblock %}

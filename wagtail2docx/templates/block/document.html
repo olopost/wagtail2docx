@@ -1,0 +1,10 @@
+
+{% load wagtailimages_tags %}
+<div class="card" style="width: 18rem;">
+    {% image self.image original class="card-img-top img-fluid rounded" %}
+  <div class="card-body">
+    <h5 class="card-title">{{ self.document }}</h5>
+    <p class="card-text">{{ self.comment }}</p>
+    <a href="{{ self.document.url }}" class="btn btn-primary">{{ self.document }}</a>
+  </div>
+</div>

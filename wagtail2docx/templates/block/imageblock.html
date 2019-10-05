@@ -1,0 +1,10 @@
+{% load wagtailimages_tags %}
+{% image self.image original as photo %}
+<div class="card" style="width: 18rem;">
+    <a href="{{ photo.url }}"  data-lightbox="image-1">
+        {% image self.image original class="card-img img-thumbnail rounded" style="width: 90%;"%}
+    </a>
+    <div class="card-body">
+        <p class="card-title" style="text-align: center">{{ self.caption }}</p>
+    </div>
+</div>

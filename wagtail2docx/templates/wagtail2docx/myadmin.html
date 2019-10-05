@@ -1,0 +1,33 @@
+{% extends 'wagtailadmin/base.html' %}
+
+{% block content %}
+
+    <header class="">
+        <div class="row nice-padding">
+            <div class="left">
+                <div class="col header-title">
+                    <h1 class="icon icon-user">MyAdmin dashboard</h1>
+                </div>
+            </div>
+            <div class="right"></div>
+        </div>
+    </header>
+
+
+    <h2>Make migrations</h2>
+<form method="post" action=".">
+  {% csrf_token %}
+  <div class="submit-row">
+  <input type="submit" class="button" name="pmkmig" value="Exécuter python make migration">
+  </div>
+</form>
+<br/><hr/>
+    <h2>Migrate</h2>
+    <form method="post" action=".">
+        {% csrf_token %}
+        <div class="submit-row">
+            <input type="submit" class="button" name="pmigrate" value="Exécuter python make migration">
+        </div>
+    </form>
+    <br/><hr/>
+{% endblock content %}

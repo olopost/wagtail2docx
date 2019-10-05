@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load wagtailuserbar   %}
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+{% load site_extra %}
+
+{% block content %}
+{% wagtailuserbar %}
+        <h1>{{ page.title }}</h1>
+
+        <div>{{ page.intro|richtext }}</div>
+        <form action="{% pageurl page %}?p={{ fields_step.number|add:"1" }}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit">
+        </form>
+{% endblock %}

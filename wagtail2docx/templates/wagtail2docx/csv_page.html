@@ -1,0 +1,68 @@
+
+{% extends "base.html" %}
+{% load wagtailuserbar   %}
+{% load wagtailimages_tags %}
+{% load site_extra %}
+
+{% block content %}
+{% wagtailuserbar %}
+    <section class="text-left my-5">
+
+        {% wagtailuserbar %}
+
+
+        <!-- Section heading -->
+        <h1 class="h1-responsive font-weight-bold my-5">{{ page.title }}</h1>
+        <!-- Section description -->
+        <a id="export" class="btn btn-grey fa fa-file-excel-o"> Export CSV</a>
+        <p class="dark-grey-text w-responsive mx-auto mb-5">
+            <div id="table"></div>
+        </p>
+        <a href="{{ page.get_parent.url }}   " class="btn btn-blue fa fa-arrow-left">&nbsp;Retour</a>
+    </section>
+<script type="application/javascript">
+
+    var data = [
+        {% for row in file %}
+            [{%  for column in row %}"{{ column }}",{% endfor %}],
+        {% endfor %}
+];
+
+var container = document.getElementById('table');
+var hot = new Handsontable(container, {
+    licenseKey: 'c1584-308e7-abdd4-64504-6de49',
+    data: data,
+    colHeaders: true,
+    rowHeaders: true,
+    contextMenu: true,
+    sortIndicator: true,
+    columnSorting: true,
+    filters: true,
+    dropdownMenu: true,
+});
+
+var bexport = document.getElementById("export");
+var exportplugin = hot.getPlugin('exportFile');
+bexport.addEventListener('click', function()
+{
+    var exportedString = exportplugin.downloadFile('csv', {
+        bom: false,
+        columnDelimiter: ';',
+        columnHeaders: false,
+        exportHiddenColumns: true,
+        exportHiddenRows: true,
+        fileExtension: 'csv',
+        filename: 'ExportCSV-[YYYY]-[MM]-[DD]',
+        mimeType: 'text/csv',
+        rowDelimiter: '\r\n',
+        rowHeaders: true
+    });
+    console.log(exportedString);
+
+});
+
+</script>
+
+
+{% endblock %}
+
