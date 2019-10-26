@@ -9,6 +9,7 @@ from django.conf import settings
 from docxtpl import DocxTemplate, RichText, Subdoc
 from wagtail.core.blocks.base import BoundBlock
 import os
+import logging
 from wagtail.admin.menu import MenuItem
 from bs4 import BeautifulSoup
 import bs4
@@ -55,7 +56,10 @@ class SettingView(TemplateView):
                     lblock.append({'type': block.block_type, 'value': block.value})
                 elif block.block_type in ('paragraph'):
                     lblock.append({'type': block.block_type, 'value': self.html2sb(str(block.value), doc)})
+                elif block.block_type in ('warning'):
+                        lblock.append({'type': block.block_type, 'value': self.html2sb(block.value.bound_blocks['warning'].value.source, doc)})
                 else:
+                    logging.error(f"type : { block.block_type }")
                     subdoc_dir  = os.path.join(settings.STATICFILES_DIRS[0], "template/other.docx")
                     doc = DocxTemplate(subdoc_dir)
                     subdoc = doc.new_subdoc().add_paragraph('un paragraphe')
