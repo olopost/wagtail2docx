@@ -71,10 +71,8 @@ class SettingView(TemplateView):
     def post(self, request, *args, **kwargs):
         tpl_dir = os.path.join(settings.STATICFILES_DIRS[0], "template/order_tpl.docx")
         doc = DocxTemplate(tpl_dir)
-        print(request.POST)
         # context = {'title': request.POST['filename']}
         context = self.get_page(request.POST['id'], doc)
-        print(context)
         doc.render(context)
         response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
         response['Content-Disposition'] = f"attachment; filename={request.POST['filename']}.docx"
@@ -86,11 +84,8 @@ class SettingView(TemplateView):
         context['title'] = 'Génération des documents'
         context['pages'] = Page.objects.live()
         # for page in Page.get_root_nodes():
-        #     print(f"{type(page)}({page.id})-{page.content_type}")
         #     for item in page.get_children():
-        #         print(f"->{type(item)}({item.id})-{item.content_type}")
         #         for subpage in item.get_children():
-        #             print(f"-->{type(subpage)}({subpage.id})-{subpage.content_type}")
         return context
 
     def will_modify_explorer_page_queryset(self):

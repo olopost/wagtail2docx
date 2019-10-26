@@ -3,7 +3,7 @@ import setuptools
 with open("README.rst", "r") as fh:
     long_description = fh.read()
 with open("requirements.txt", "r") as rp:
-    req = rp.read()
+    req = rp.read().splitlines()
 
 setuptools.setup(
     name="wagtail2docx",
