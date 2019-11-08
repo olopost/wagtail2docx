@@ -92,11 +92,11 @@ class SettingView(TemplateView):
         return False
 
     def get_admin_urls_for_registration(self):
-        urls = (url(r'^wagtail2docx/$', SettingView.as_view(), name='view_env'),)
+        urls = (url(r'^wagtail2docx/$', SettingView.as_view(), name='view_wagtail2docx'),)
         return urls
 
     def get_menu_item(self, order=None):
-        return MenuItem('W2D - Setting', reverse("view_env"), classnames='icon icon-cog', order=10000)
+        return MenuItem('W2D - Setting', reverse("view_wagtail2docx"), classnames='icon icon-cog', order=10000)
 
     def get_permissions_for_registration(self):
         return Permission.objects.none()
